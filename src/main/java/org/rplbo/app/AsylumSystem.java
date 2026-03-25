@@ -31,7 +31,6 @@ public class AsylumSystem {
     // MENU LEVEL 1: SEBELUM LOGIN
     // ==========================================
 
-    // Loop menu utama aplikasi (Level 1) untuk mengarahkan pengguna ke form login atau akses guest
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
@@ -61,7 +60,6 @@ public class AsylumSystem {
         }
     }
 
-    // Meminta input username & password, lalu memverifikasinya melalui UserManager
     private void prosesLogin(Scanner scanner) {
         System.out.print("Username: ");
         String username = scanner.nextLine();
@@ -86,7 +84,6 @@ public class AsylumSystem {
         }
     }
 
-    // Meminta data akun baru (termasuk validasi role) dan mendaftarkannya melalui UserManager
     private void prosesRegistrasi(Scanner scanner) {
         System.out.println("\n=== Registrasi Akun Baru ===");
         System.out.print("Username : ");
@@ -121,7 +118,7 @@ public class AsylumSystem {
     // MENU LEVEL 2: SETELAH LOGIN (DOKTER)
     // ==========================================
 
-    // Loop menu utama khusus Dokter untuk mengakses fitur CRUD rekam medis dan pendaftaran
+
     private void menuDokter(Scanner scanner, String dokter) {
         boolean back = false;
         while (!back) {
@@ -166,7 +163,7 @@ public class AsylumSystem {
         }
     }
 
-    // Meminta input data rekam medis baru, lalu memanggil method tambahRekamMedis di RekamMedisManager
+
     private void tambahRekamMedis(Scanner scanner, String usernameDokter) {
         System.out.println("\n=== TAMBAH REKAM MEDIS ===");
         System.out.print("Masukkan Nama Pasien: ");
@@ -183,7 +180,7 @@ public class AsylumSystem {
         }
     }
 
-    // Meminta ID target dan diagnosis baru, lalu memanggil method editRekamMedis di RekamMedisManager
+
     private void editRekamMedis(Scanner scanner) {
         System.out.println("\n=== EDIT REKAM MEDIS ===");
         System.out.print("Masukkan ID Rekam Medis yang ingin diubah: ");
@@ -199,7 +196,6 @@ public class AsylumSystem {
         }
     }
 
-    // Meminta ID target, lalu memanggil method hapusRekamMedis di RekamMedisManager
     private void hapusRekamMedis(Scanner scanner) {
         System.out.println("\n=== HAPUS REKAM MEDIS ===");
         System.out.print("Masukkan ID Rekam Medis yang ingin dihapus: ");
@@ -213,7 +209,6 @@ public class AsylumSystem {
         }
     }
 
-    // Mengambil seluruh daftar rekam medis dari RekamMedisManager dan mencetaknya ke layar
     private void allRekamMedis() {
         List<RekamMedis> list = rekamMedisManager.getAllRekamMedis();
         System.out.println("\n=== DAFTAR SEMUA REKAM MEDIS ===");
@@ -221,15 +216,15 @@ public class AsylumSystem {
             System.out.println("Belum ada data.");
         } else {
             for (RekamMedis rm : list) {
-                System.out.println("ID: " + rm.getId() + " | Pasien: " + rm.getNamaPasien() +
-                        " | Dokter: dr. " + rm.getNamaDokter() + " | Tgl: " + rm.getTanggal());
+                System.out.println("ID: " + rm.getId() + " | Pasien: " + rm.getNamapasien() +
+                        " | Dokter: dr. " + rm.getNamadokter() + " | Tgl: " + rm.getTanggal());
                 System.out.println("Diagnosis: " + rm.getDiagnosis());
                 System.out.println("-------------------------------------------------");
             }
         }
     }
 
-    // Meminta keyword nama, memanggil method pencarian di RekamMedisManager, lalu mencetak hasilnya
+
     private void cariPasien(Scanner scanner) {
         System.out.println("\n=== CARI DATA REKAM MEDIS PASIEN ===");
         System.out.print("Masukkan nama pasien yang dicari: ");
@@ -243,8 +238,8 @@ public class AsylumSystem {
             System.out.println("Tidak ada rekam medis yang ditemukan untuk pasien tersebut.");
         } else {
             for (RekamMedis rm : list) {
-                System.out.println("ID: " + rm.getId() + " | Pasien: " + rm.getNamaPasien() +
-                        " | Dokter: dr. " + rm.getNamaDokter() + " | Tgl: " + rm.getTanggal());
+                System.out.println("ID: " + rm.getId() + " | Pasien: " + rm.getNamapasien() +
+                        " | Dokter: dr. " + rm.getNamadokter() + " | Tgl: " + rm.getTanggal());
                 System.out.println("Diagnosis: " + rm.getDiagnosis());
                 System.out.println("-------------------------------------------------");
             }
@@ -255,7 +250,6 @@ public class AsylumSystem {
     // MENU LEVEL 2: SETELAH LOGIN (PASIEN)
     // ==========================================
 
-    // Loop menu utama khusus Pasien untuk mengakses profil dan melihat riwayat kesehatannya sendiri
     private void menuPasien(Scanner scanner, String pasien) {
         boolean back = false;
         while (!back) {
@@ -294,9 +288,9 @@ public class AsylumSystem {
             System.out.println("Anda belum memiliki riwayat rekam medis.");
         } else {
             for (RekamMedis rm : list) {
-                if (rm.getNamaPasien().equalsIgnoreCase(namaPasien)) {
+                if (rm.getNamapasien().equalsIgnoreCase(namaPasien)) {
                     adaData = true;
-                    System.out.println("ID: " + rm.getId() + " | Dokter: dr. " + rm.getNamaDokter() + " | Tgl: " + rm.getTanggal());
+                    System.out.println("ID: " + rm.getId() + " | Dokter: dr. " + rm.getNamadokter() + " | Tgl: " + rm.getTanggal());
                     System.out.println("Diagnosis: " + rm.getDiagnosis());
                     System.out.println("-------------------------------------------------");
                 }

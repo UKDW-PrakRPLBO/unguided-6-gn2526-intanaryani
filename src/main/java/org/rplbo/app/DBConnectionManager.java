@@ -1,30 +1,26 @@
 package org.rplbo.app;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DBConnectionManager {
-    // TODO 1 : CONNECT KE DATABASE (Masukan Path DB)
-    private static final String DB_URL = "";
+
+    private static final String DB_URL = "jdbc:sqlite:D:\\New folder (4)\\unguided-6-gn2526-intanaryani\\Asylum.db";
     private static Connection connection;
 
     private DBConnectionManager() {
-        // Private constructor to prevent instantiation
     }
 
     public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                // TODO 2 : getConnection jika connection null/closed (gunakan DriverManager.getConnection)
-                connection = null;
+                connection = DriverManager.getConnection(DB_URL);
+                System.out.println("Database connected successfully!");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error connecting to database: " + e.getMessage());
         }
-        // Return connection
         return connection;
     }
 
@@ -32,9 +28,10 @@ public class DBConnectionManager {
         if (connection != null) {
             try {
                 connection.close();
+                System.out.println("Database connection closed.");
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Error closing connection: " + e.getMessage());
             }
         }
     }
-    }
+}
